@@ -33,8 +33,8 @@ test("초기화면에 버튼이 enable인지 확인하고, 체크박스가 unche
 
 test("체크박스 클릭시 버튼이 비활성화되고, 다시 클릭하면 활성화된다", () => { 
   render(<App />);
+  const checkboxEle = screen.getByRole("checkbox", {name : "Disable button"});
   const buttonEle = screen.getByRole("button", { name: "Change to blue" });
-  const checkboxEle = screen.getByRole("checkbox");
 
   fireEvent.click(checkboxEle);
   expect(buttonEle).toBeDisabled();
