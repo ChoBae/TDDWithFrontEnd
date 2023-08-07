@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import App from "./App";
+import App, {replaceCamelWithSpaces} from "./App";
 
 test("초기화면에 빨간색 버튼이 있는지 확인하고, 버튼을 클릭시 파랑색 버튼이 되는지 확인한다", () => {
   render(<App />);
@@ -69,4 +69,16 @@ test("체크박스 클릭시 버튼이 enable될때 색상이 유지되는지 �
   // 체크박스를 클릭해서 버튼을 활성화 시켰을때 버튼 색상이 파랑색으로 유지되어있는지 확인한다.
   fireEvent.click(checkboxEle);
   expect(buttonEle).toHaveStyle({ backgroundColor: "blue" });
+});
+
+describe("spaces before camel-case capital letters", () => {
+  test("Works for no inner capital letters", () => {
+    expect(replaceCamelWithSpaces("Red")).toBe("Red");
+  });
+  test("Works for one inner capital letters", () => {
+    expect(replaceCamelWithSpaces("MidnightBlue")).toBe("Midnight Blue");
+  });
+  test("Works for multiple inner capital letters", () => {
+    expect(replaceCamelWithSpaces("MediumVioletRed")).toBe("Medium Violet Red");
+  });
 });
