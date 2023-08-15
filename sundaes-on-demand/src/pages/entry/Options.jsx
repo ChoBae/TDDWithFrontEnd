@@ -12,14 +12,21 @@ export default function Options({ optionType }) {
   const [error, setError] = useState(false);
   const { totals } = useOrderDetails();
   useEffect(() => {
+    // api 요청시 보낼 AbortController 생성
+    const controller = new AbortController();
     axios
-      .get(`http://localhost:3030/${optionType}`)
+      .get(`http://localhost:3030/${optionType}`, { signal: controller.signal })
       .then((response) => {
         setItems(response.data);
       })
       .catch((error) => {
         setError(true);
       });
+
+    // 컴포넌트 언마운트시 axiox call을 중단한다.
+    return () => {
+      controller.abort();
+    };
   }, [optionType]);
 
   if (error) {
