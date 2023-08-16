@@ -7,6 +7,7 @@ import AlertBanner from "../common/AlertBanner";
 import { formatCurrency } from "../utils";
 import { pricePerItem } from "../../constants";
 import { useOrderDetails } from "../../contexts/OrderDetails";
+
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
@@ -30,7 +31,7 @@ export default function Options({ optionType }) {
   }, [optionType]);
 
   if (error) {
-    return <AlertBanner />;
+    return <AlertBanner />
   }
   const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
   const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
@@ -48,7 +49,7 @@ export default function Options({ optionType }) {
       <p>
         {title} total: {formatCurrency(totals[optionType])}
       </p>
-      <Row>{optionItems}</Row>;
+      <Row>{optionItems}</Row>
     </>
   );
 }

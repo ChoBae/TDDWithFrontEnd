@@ -5,8 +5,14 @@ import Button from "react-bootstrap/Button";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 
-export default function SummaryForm() {
+export default function SummaryForm({ setOrderPhase }) {
   const [isChecked, setIsChecked] = useState(false);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    setOrderPhase("completed");
+  }
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body>No ice cream will actually be delivered</Popover.Body>
@@ -23,7 +29,7 @@ export default function SummaryForm() {
   );
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"
